@@ -1,0 +1,32 @@
+package templates
+
+import "github.com/JDinABox/quiz-me/web/templates/components"
+import "github.com/JDinABox/quiz-me/web"
+
+templ Main(body templ.Component) {
+	<main id="main" class="flex flex-1 grow font-sans text-base sm:text-lg">
+		@body
+	</main>
+}
+
+templ Layout(head, body templ.Component, pageURL string) {
+	<!DOCTYPE html>
+	<html lang="en" x-data="app">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			@head
+			<script type="module" src={ web.GetAssetUri("web/main.ts") }></script>
+			<link rel="stylesheet" href={ web.GetAssetUri("web/style.css") }/>
+		</head>
+		<body :class="{ 'dark': theme.dark }" class="dark">
+			<div class="flex min-h-screen min-w-full">
+				<div class="mx-auto flex max-w-6xl grow flex-col px-3 sm:px-6">
+					@components.Header(pageURL)
+					@Main(body)
+					@components.Footer()
+				</div>
+			</div>
+		</body>
+	</html>
+}

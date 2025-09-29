@@ -77,16 +77,14 @@ func GetAssetUri(name string) (string, error) {
 	if dev.IsDev {
 		f, err := dynamicFS.Open(".vite/manifest.json")
 		if err != nil {
-			slog.Error("failed to open manifest.json in GetAssetUri", "error", err)
-			os.Exit(1)
+			return "", fmt.Errorf("failed to open manifest.json in GetAssetUri: %w", err)
 		}
 		defer f.Close()
 
 		var m Manifest
 
 		if err = json.UnmarshalRead(f, &m); err != nil {
-			slog.Error("failed to unmarshal manifest.json in GetAssetUri", "error", err)
-			os.Exit(1)
+			return "", fmt.Errorf("failed to unmarshal manifest.json in GetAssetUr: %w", err)
 		}
 
 		chunk, ok = m[name]

@@ -24,11 +24,11 @@
 
 @theme static {
 	--color-bg-light: var(--color-zinc-100);
-	--color-bg-dark: var(--color-zinc-950);
+	--color-bg-dark: var(--color-zinc-900);
 }
 
 body {
-	@apply bg-bg-light dark:bg-bg-dark min-h-screen text-zinc-900 dark:text-zinc-50;
+	@apply bg-bg-light dark:bg-bg-dark min-h-screen text-zinc-950 dark:text-zinc-50;
 }
 
 .h1 {
