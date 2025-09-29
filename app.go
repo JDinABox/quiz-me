@@ -53,9 +53,13 @@ func newApp(conf *Config) (*chi.Mux, error) {
 		})
 
 		r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-			err := execPage(w, r, home.Head(), home.Body())
-			if err != nil {
+			if err := execPage(w, r, home.Head(), home.Body()); err != nil {
 				slog.Error("failed to render home page", "error", err)
+			}
+		})
+		r.Get("/quizzes", func(w http.ResponseWriter, r *http.Request) {
+			if err := execPage(w, r, quizzes.Head(), quizzes.Body(quiz.Quizzes{})); err != nil {
+				slog.Error("failed to render quizzes page", "error", err)
 			}
 		})
 	})
