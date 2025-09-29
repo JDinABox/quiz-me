@@ -1,0 +1,20 @@
+package quizzes
+
+import "github.com/JDinABox/quiz-me/quiz"
+
+templ Head() {
+	<title>Quizzes - Quiz Me</title>
+	<meta name="description" content="Create and take quizzes"/>
+}
+
+templ Body(quizzes quiz.Quizzes) {
+	<div class="flex flex-col">
+		<h1>Quizzes</h1>
+		for _, q := range quizzes {
+			<a href={ "/q/" + q.ID }>
+				<h2>{ q.Name }</h2>
+				<div>{ q.Description }</div>
+			</a>
+		}
+	</div>
+}
