@@ -8,13 +8,15 @@ templ Head() {
 }
 
 templ Body(quizzes quiz.Quizzes) {
-	<div class="flex flex-col">
-		<h1>Quizzes</h1>
-		for _, q := range quizzes {
-			<a href={ "/q/" + q.ID }>
-				<h2>{ q.Name }</h2>
-				<div>{ q.Description }</div>
-			</a>
-		}
+	<div class="flex flex-col mt-4">
+		<h1 class="h2">Quizzes</h1>
+		<div class="mt-5 gap-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+			for _, q := range quizzes {
+				<a href={ "/q/" + q.ID } class="p-6 flex flex-col gap-2 rounded-lg bg-zinc-200 dark:bg-zinc-800">
+					<h2 class="h3">{ q.Name }</h2>
+					<div class="font-medium">{ q.Description }</div>
+				</a>
+			}
+		</div>
 	</div>
 }

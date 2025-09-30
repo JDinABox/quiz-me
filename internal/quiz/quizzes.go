@@ -5,7 +5,7 @@ var QuizList = Quizzes{
 		ID:                  "comptia-security-plus",
 		Name:                "CompTIA Security+ Practice Quiz",
 		Description:         "A CompTIA Security+ Practice Test",
-		MaxQuestionsPerQuiz: 2,
+		MaxQuestionsPerQuiz: 30,
 		Questions: []Question{
 			{
 				Question: "A security analyst is reviewing network traffic and notices an unusual amount of outbound traffic to an unknown IP address during non-business hours. Which of the following is the MOST likely cause?",
