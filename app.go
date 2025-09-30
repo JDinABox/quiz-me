@@ -6,9 +6,12 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/JDinABox/quiz-me/quiz"
 	"github.com/JDinABox/quiz-me/web"
 	"github.com/JDinABox/quiz-me/web/templates"
 	"github.com/JDinABox/quiz-me/web/templates/home"
+	"github.com/JDinABox/quiz-me/web/templates/quizzes"
+	"github.com/JDinABox/quiz-me/web/templates/showquiz"
 	"github.com/a-h/templ"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
@@ -58,7 +61,17 @@ func newApp(conf *Config) (*chi.Mux, error) {
 			}
 		})
 		r.Get("/quizzes", func(w http.ResponseWriter, r *http.Request) {
-			if err := execPage(w, r, quizzes.Head(), quizzes.Body(quiz.Quizzes{})); err != nil {
+			if err := execPage(w, r, quizzes.Head(), quizzes.Body(quiz.QuizList)); err != nil {
+				slog.Error("failed to render quizzes page", "error", err)
+			}
+		})
+		r.Get("/q/{id}", func(w http.ResponseWriter, r *http.Request) {
+			id := chi.URLParam(r, "id")
+			q, ok := quiz.QuizList[quiz.QuizID(id)]
+			if !ok {
+				errorHandler(w, r, http.StatusNotFound)
+			}
+			if err := execPage(w, r, showquiz.Head(), showquiz.Body(q)); err != nil {
 				slog.Error("failed to render quizzes page", "error", err)
 			}
 		})
@@ -71,4 +84,17 @@ func execPage(w http.ResponseWriter, r *http.Request, head, body templ.Component
 		return template.Main(body).Render(r.Context(), w)
 	}*/
 	return templates.Layout(head, body, r.RequestURI).Render(r.Context(), w)
+}
+
+func errorHandler(w http.ResponseWriter, r *http.Request, errStatus int) error {
+	var (
+		errMsg = "Something went wrong"
+	)
+	switch errStatus {
+	case http.StatusNotFound:
+		errMsg = "Page not found"
+		break
+	}
+	w.WriteHeader(errStatus)
+	return execPage(w, r, templates.ErrHead(errMsg), templates.ErrBody(errStatus, errMsg))
 }

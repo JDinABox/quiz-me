@@ -29,7 +29,7 @@ func Header(pageURL string) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"mt-5 flex flex-col text-base\"><div class=\"flex items-start justify-between align-baseline\"><nav class=\"flex space-x-4\"><a class=\"font-bold\" href=\"/\"><span class=\"text-blue-700 dark:text-blue-600\">Quiz</span> Me</a> <a class=\"hover:text-black dark:hover:text-white font-medium\" href=\"/quizzes\">Quizzes</a></nav><div class=\"flex\"><button @click=\"toggleTheme\" x-text=\"'[' + (theme.dark ? 'Dark' : 'Light') + ']'\" class=\"cursor-pointer\">[Dark]</button></div></div><div class=\"h-[1px] mt-3 bg-zinc-600 dark:bg-zinc-700\"></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"mt-2 sm:mt-5 flex flex-col text-base\"><div class=\"flex mb-2 sm:mb-3 items-start justify-between align-baseline\"><nav class=\"flex space-x-4\"><a class=\"font-bold\" href=\"/\"><span class=\"text-blue-700 dark:text-blue-500\">Quiz</span> Me</a> <a class=\"hover:text-black dark:hover:text-white font-medium\" href=\"/quizzes\">Quizzes</a></nav><div class=\"flex\"><button @click=\"toggleTheme\" x-text=\"'[' + (theme.dark ? 'Dark' : 'Light') + ']'\" class=\"cursor-pointer\">[Dark]</button></div></div><div class=\"h-[1px] bg-zinc-600 dark:bg-zinc-700\"></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

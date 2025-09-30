@@ -1,0 +1,13 @@
+package templates
+
+templ ErrHead(ErrMsg string) {
+	<title>{ ErrMsg } - Quiz Me</title>
+	<meta name="robots" content="noindex"/>
+}
+
+templ ErrBody(ErrType int, ErrMsg string) {
+	<div class="flex flex-col">
+		<div>Error: { ErrType }</div>
+		<div>{ ErrMsg }</div>
+	</div>
+}
