@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/JDinABox/quiz-me/quiz"
+	"github.com/JDinABox/quiz-me/internal/quiz"
 	"github.com/JDinABox/quiz-me/web"
 	"github.com/JDinABox/quiz-me/web/templates"
 	"github.com/JDinABox/quiz-me/web/templates/home"
@@ -93,7 +93,6 @@ func errorHandler(w http.ResponseWriter, r *http.Request, errStatus int) error {
 	switch errStatus {
 	case http.StatusNotFound:
 		errMsg = "Page not found"
-		break
 	}
 	w.WriteHeader(errStatus)
 	return execPage(w, r, templates.ErrHead(errMsg), templates.ErrBody(errStatus, errMsg))
