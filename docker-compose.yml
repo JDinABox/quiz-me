@@ -1,0 +1,10 @@
+services:
+  quiz-me:
+    build: .
+    container_name: quiz-me
+    restart: unless-stopped
+    ports:
+      - '8080:80'
+    environment:
+      LISTEN: ':80'
+      LOGGING: 'false'
