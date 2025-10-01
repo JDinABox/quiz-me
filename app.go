@@ -77,7 +77,7 @@ func newApp(conf *Config) (*chi.Mux, error) {
 				slog.Error("failed to marshal quiz", "error", err)
 				errorHandler(w, r, http.StatusInternalServerError)
 			}
-			if err := execPage(w, r, showquiz.Head(), showquiz.Body(string(qJson))); err != nil {
+			if err := execPage(w, r, showquiz.Head(q), showquiz.Body(string(qJson))); err != nil {
 				slog.Error("failed to render quizzes page", "error", err)
 			}
 		})

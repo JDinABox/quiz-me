@@ -2,12 +2,13 @@ package showquiz
 
 import (
 	"fmt"
+	"github.com/JDinABox/quiz-me/internal/quiz"
 	"github.com/JDinABox/quiz-me/web"
 )
 
-templ Head() {
-	<title>Quizzes - Quiz Me</title>
-	<meta name="description" content="Create and take quizzes"/>
+templ Head(q quiz.Quiz) {
+	<title>{ q.Name } - Quiz Me</title>
+	<meta name="description" content={ q.Description }/>
 	<script type="module" src={ web.GetAssetUri("web/templates/showquiz/quiz.ts") }></script>
 }
 
