@@ -2,6 +2,7 @@ package quizme
 
 import (
 	_ "embed"
+	"encoding/json/v2"
 	"log/slog"
 	"net/http"
 	"os"
@@ -71,7 +72,12 @@ func newApp(conf *Config) (*chi.Mux, error) {
 			if !ok {
 				errorHandler(w, r, http.StatusNotFound)
 			}
-			if err := execPage(w, r, showquiz.Head(), showquiz.Body(q)); err != nil {
+			qJson, err := json.Marshal(q)
+			if err != nil {
+				slog.Error("failed to marshal quiz", "error", err)
+				errorHandler(w, r, http.StatusInternalServerError)
+			}
+			if err := execPage(w, r, showquiz.Head(), showquiz.Body(string(qJson))); err != nil {
 				slog.Error("failed to render quizzes page", "error", err)
 			}
 		})

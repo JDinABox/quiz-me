@@ -8,7 +8,7 @@ export default defineConfig({
 		manifest: true,
 		rollupOptions: {
 			// overwrite default .html entry
-			input: ['./web/main.ts', './web/style.css'],
+			input: ['./web/main.ts', './web/style.css', './web/templates/showquiz/quiz.ts'],
 			output: {
 				dir: './web/dist'
 			}

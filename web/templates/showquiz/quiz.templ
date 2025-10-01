@@ -1,82 +1,23 @@
 package showquiz
 
-import "github.com/JDinABox/quiz-me/internal/quiz"
+import (
+	"fmt"
+	"github.com/JDinABox/quiz-me/web"
+)
 
 templ Head() {
 	<title>Quizzes - Quiz Me</title>
 	<meta name="description" content="Create and take quizzes"/>
+	<script type="module" src={ web.GetAssetUri("web/templates/showquiz/quiz.ts") }></script>
 }
 
-templ Body(quiz quiz.Quiz) {
-	<div class="flex grow justify-center" x-data={ templ.JSONString(quiz) } x-init="shuffleArray(questions)">
+templ Body(quizJson string) {
+	<div class="flex grow justify-center" { templ.Attributes{"x-data":fmt.Sprintf("quiz(%s)",quizJson)}... }>
 		<div
 			class="max-w-3xl flex flex-col grow my-1 sm:my-14 p-4 sm:p-6 bg-zinc-200 dark:bg-zinc-800 rounded-lg"
-			x-data="{
-				currentQuestion: 0,
-				score: 0,
-				selectedAnswers: [],
-				active: true,
-				toggleAnswer(index) {
-					if (this.selectedAnswers.includes(index)) {
-						const i = this.selectedAnswers.indexOf(index);
-						if (i > -1) {
-							this.selectedAnswers.splice(i, 1);
-						}
-						return
-					}
-					this.selectedAnswers.push(index)
-				},
-				get correctAnswers() {
-					return questions[this.currentQuestion].correct
-				},
-				get numberOfCorrect() {
-					return this.correctAnswers.length
-				},
-				get leftToSelect() {
-					return this.numberOfCorrect - this.selectedAnswers.length
-				},
-				get incorrect() {
-					return this.correctAnswers.filter(x => !this.selectedAnswers.includes(String(x))).length;
-				},
-				buttonColor(index) {
-					if (!this.selectedAnswers.includes(index)) {
-						if (this.leftToSelect <= 0 && this.correctAnswers.includes(Number(index))) {
-							return 'green-dark'
-						}
-						return 'gray'
-					}
-					if (this.leftToSelect > 0) {						
-						return 'blue'
-					}
-					if (this.correctAnswers.includes(Number(index))) {
-						return 'green'
-					}
-					return 'red'
-				},
-				nextQuestion() {
-					if (this.incorrect === 0) {
-						this.score += 1
-					} else if (this.numberOfCorrect > 1) {
-						this.score += (this.numberOfCorrect - this.incorrect)/this.numberOfCorrect
-					}
-					if (this.currentQuestion === maxQuestionsPerQuiz - 1) {
-						this.active = false
-						return;
-					}
-					this.selectedAnswers = []
-					this.currentQuestion++
-				},
-				resetQuiz() {
-					shuffleArray(questions)
-					this.score = 0
-					this.selectedAnswers = []
-					this.currentQuestion = 0
-					this.active = true
-				}
-			}"
 		>
 			<div class="flex justify-between gap-2 mb-4">
-				<h1 class="h3">{ quiz.Name }</h1>
+				<h1 class="h3" x-text="name"></h1>
 				<div class="flex flex-wrap justify-end gap-2 text-nowrap h-min font-medium text-sm text-white">
 					<div class="px-2 py-1 rounded-lg bg-blue-600 dark:bg-blue-700" x-text="'Question: '+(currentQuestion+1)+'/'+maxQuestionsPerQuiz"></div>
 					<div class="px-2 py-1 rounded-lg bg-green-700" x-text="'Score: '+Number(Math.round(score+'e2')+'e-2');"></div>
@@ -106,8 +47,8 @@ templ Body(quiz quiz.Quiz) {
 						<div class="flex flex-col grow justify-between gap-4 font-medium">
 							<div
 								:class="(incorrect > 0)?
-							'text-red-800 dark:text-red-100 bg-red-950':
-							'text-green-800 dark:text-green-100 bg-green-950'"
+							'text-red-100 bg-red-950':
+							'text-green-100 bg-green-950'"
 								class="rounded-lg py-3 px-4"
 							>
 								<div x-text="questions[currentQuestion].explanation"></div>
