@@ -31,7 +31,7 @@ func Footer() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<footer class=\"mt-6 mb-5 flex flex-col items-center space-y-1.5\"><div class=\"flex items-center space-x-1.5\"><a class=\"flex items-center\" href=\"https://jdc.foo\" target=\"_blank\" rel=\"noreferrer\"><div>jdc.foo</div></a><div class=\"h-5 w-[1px] bg-zinc-900 dark:bg-zinc-50\"></div><a class=\"flex items-center\" href=\"https://github.com/JDinABox/quiz-me\" target=\"_blank\" rel=\"noreferrer\"><div class=\"mr-1.5 h-5 w-5\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<footer class=\"mt-8 mb-6 flex flex-col items-center space-y-3\"><div class=\"flex items-center space-x-4\"><a class=\"flex items-center link\" href=\"https://jdc.foo\" target=\"_blank\" rel=\"noreferrer\"><div>jdc.foo</div></a><div class=\"h-5 w-[1px] bg-zinc-300 dark:bg-zinc-700\"></div><a class=\"flex items-center link\" href=\"https://github.com/JDinABox/quiz-me\" target=\"_blank\" rel=\"noreferrer\"><div class=\"mr-2 h-5 w-5\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -39,7 +39,7 @@ func Footer() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div><div>Github</div></a></div></footer>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div><div>GitHub</div></a></div></footer>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

@@ -32,11 +32,11 @@ body {
 }
 
 .h1 {
-	@apply text-3xl font-bold text-zinc-800 sm:text-4xl dark:text-zinc-100;
+	@apply text-4xl font-bold text-zinc-900 sm:text-5xl dark:text-white;
 }
 
 .h2 {
-	@apply text-2xl font-bold sm:text-3xl;
+	@apply text-3xl font-bold sm:text-4xl;
 }
 
 .h3 {
@@ -48,5 +48,5 @@ body {
 }
 
 .link {
-	@apply text-sky-800 dark:text-sky-600;
+	@apply font-medium text-zinc-700 transition-colors hover:text-blue-600 dark:text-zinc-300 dark:hover:text-blue-400;
 }

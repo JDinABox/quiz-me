@@ -10,10 +10,11 @@ import templruntime "github.com/a-h/templ/runtime"
 
 import (
 	"fmt"
+	"github.com/JDinABox/quiz-me/internal/quiz"
 	"github.com/JDinABox/quiz-me/web"
 )
 
-func Head() templ.Component {
+func Head(q quiz.Quiz) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -34,20 +35,46 @@ func Head() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<title>Quizzes - Quiz Me</title><meta name=\"description\" content=\"Create and take quizzes\"><script type=\"module\" src=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<title>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var2 string
-		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(web.GetAssetUri("web/templates/showquiz/quiz.ts"))
+		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(q.Name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/showquiz/quiz.templ`, Line: 11, Col: 78}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/showquiz/quiz.templ`, Line: 10, Col: 16}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "\"></script>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, " - Quiz Me</title><meta name=\"description\" content=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var3 string
+		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(q.Description)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/showquiz/quiz.templ`, Line: 11, Col: 49}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\"><script type=\"module\" src=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var4 string
+		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(web.GetAssetUri("web/templates/showquiz/quiz.ts"))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `web/templates/showquiz/quiz.templ`, Line: 12, Col: 78}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "\"></script>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -71,12 +98,12 @@ func Body(quizJson string) templ.Component {
 			}()
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var3 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var3 == nil {
-			templ_7745c5c3_Var3 = templ.NopComponent
+		templ_7745c5c3_Var5 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var5 == nil {
+			templ_7745c5c3_Var5 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "<div class=\"flex grow justify-center\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<div class=\"flex grow justify-center\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -84,7 +111,7 @@ func Body(quizJson string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "><div class=\"max-w-3xl flex flex-col grow my-1 sm:my-14 p-4 sm:p-6 bg-zinc-200 dark:bg-zinc-800 rounded-lg\"><div class=\"flex justify-between gap-2 mb-4\"><h1 class=\"h3\" x-text=\"name\"></h1><div class=\"flex flex-wrap justify-end gap-2 text-nowrap h-min font-medium text-sm text-white\"><div class=\"px-2 py-1 rounded-lg bg-blue-600 dark:bg-blue-700\" x-text=\"'Question: '+(currentQuestion+1)+'/'+maxQuestionsPerQuiz\"></div><div class=\"px-2 py-1 rounded-lg bg-green-700\" x-text=\"'Score: '+Number(Math.round(score+'e2')+'e-2');\"></div></div></div><template x-if=\"active\"><div class=\"flex flex-col grow space-y-4\"><div class=\"text-base sm:text-lg font-medium\" x-text=\"questions[currentQuestion].question\"></div><div class=\"flex flex-col space-y-4 sm:pt-2 font-medium\"><template x-for=\"(answer, index) in questions[currentQuestion].answers\" :key=\"index\"><button class=\"py-3 px-4 rounded-md transition-colors text-white\" x-text=\"answer\" @click=\"toggleAnswer(index)\" :disabled=\"leftToSelect <= 0\" :class=\"{ \n\t\t\t\t\t\t\t\t'bg-blue-700 hover:bg-blue-600 dark:bg-blue-700': buttonColor(index) === 'blue', \n\t\t\t\t\t\t\t\t'bg-zinc-700 hover:bg-zinc-600 disabled:bg-zinc-900 disabled:hover:bg-zinc-900': buttonColor(index) === 'gray',\n\t\t\t\t\t\t\t\t'bg-red-800': buttonColor(index) === 'red',\n\t\t\t\t\t\t\t\t'bg-green-800': buttonColor(index) === 'green',\n\t\t\t\t\t\t\t\t'bg-green-950': buttonColor(index) === 'green-dark',\n\t\t\t\t\t\t\t}\"></button></template></div><template x-if=\"leftToSelect <= 0\"><div class=\"flex flex-col grow justify-between gap-4 font-medium\"><div :class=\"(incorrect > 0)?\n\t\t\t\t\t\t\t'text-red-100 bg-red-950':\n\t\t\t\t\t\t\t'text-green-100 bg-green-950'\" class=\"rounded-lg py-3 px-4\"><div x-text=\"questions[currentQuestion].explanation\"></div></div><div class=\"flex justify-end\"><button class=\"px-2 py-1 bg-blue-700 dark:bg-blue-600 hover:bg-blue-800 dark:hover:bg-blue-700 transition-colors rounded-md text-zinc-50 hover:text-white\" @click=\"nextQuestion()\">Next</button></div></div></template></div></template><template x-if=\"!active\"><div class=\"flex flex-col items-center font-medium\"><div x-text=\"'You scored '+Math.round((score/maxQuestionsPerQuiz)*100)+'%'\"></div><button class=\"px-2 py-1 mt-4 bg-blue-700 dark:bg-blue-600 hover:bg-blue-800 dark:hover:bg-blue-700 transition-colors rounded-md text-zinc-50 hover:text-white\" @click=\"resetQuiz()\">Take again</button></div></template></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "><div class=\"max-w-3xl w-full flex flex-col grow my-4 sm:my-8 p-5 sm:p-6 gap-4 sm:gap-6 bg-white dark:bg-zinc-900 rounded-2xl shadow-xl border border-zinc-200 dark:border-zinc-700\"><div class=\"flex justify-between items-center gap-4\"><div class=\"flex flex-col\"><h1 class=\"h3 text-zinc-900 dark:text-white\" x-text=\"name\"></h1><div class=\"text-sm text-zinc-600 dark:text-zinc-400\" x-text=\"'Testing on: '+(maxQuestionsPerQuiz)+'/'+questions.length\"></div></div><div class=\"flex flex-wrap justify-end gap-2 text-nowrap font-semibold text-sm\"><div class=\"px-3 py-2 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-md\" x-text=\"'Question: '+(currentQuestion+1)+'/'+maxQuestionsPerQuiz\"></div><div class=\"px-3 py-2 rounded-xl bg-gradient-to-r from-green-500 to-green-600 text-white shadow-md\" x-text=\"'Score: '+Number(Math.round(score+'e2')+'e-2');\"></div></div></div><template x-if=\"active\"><div class=\"flex flex-col grow gap-4\"><div class=\"h4 font-semibold text-zinc-800 dark:text-zinc-200\" x-text=\"questions[currentQuestion].question\"></div><div class=\"flex flex-col space-y-3\"><template x-for=\"(answer, index) in questions[currentQuestion].answers\" :key=\"index\"><button class=\"py-3 px-5 rounded-xl transition-color duration-100 text-white font-semibold text-left text-lg/snug shadow-md hover:shadow-lg disabled:cursor-not-allowed\" x-text=\"answer\" @click=\"toggleAnswer(index)\" :disabled=\"leftToSelect <= 0\" :class=\"{ \n\t\t\t\t\t\t\t\t'bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700': buttonColor(index) === 'blue', \n\t\t\t\t\t\t\t\t'bg-gradient-to-r from-zinc-500 to-zinc-600 hover:from-zinc-600 hover:to-zinc-700 disabled:from-zinc-400 disabled:to-zinc-500': buttonColor(index) === 'gray',\n\t\t\t\t\t\t\t\t'bg-gradient-to-r from-red-500 to-red-600': buttonColor(index) === 'red',\n\t\t\t\t\t\t\t\t'bg-gradient-to-r from-green-500 to-green-600': buttonColor(index) === 'green',\n\t\t\t\t\t\t\t\t'bg-gradient-to-r from-green-700 to-green-800': buttonColor(index) === 'green-dark',\n\t\t\t\t\t\t\t}\"></button></template></div><template x-if=\"leftToSelect <= 0\"><div class=\"flex flex-col grow justify-between gap-6\"><div :class=\"(incorrect > 0)?\n\t\t\t\t\t\t\t'text-red-50 bg-gradient-to-r from-red-600 to-red-700':\n\t\t\t\t\t\t\t'text-green-50 bg-gradient-to-r from-green-600 to-green-700'\" class=\"rounded-xl py-4 px-6 shadow-md\"><div class=\"font-medium text-lg/snug\" x-text=\"questions[currentQuestion].explanation\"></div></div><div class=\"flex justify-end\"><button class=\"px-4 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-all duration-200 rounded-xl font-semibold text-white shadow-md hover:shadow-lg transform hover:-translate-y-0.5\" @click=\"nextQuestion()\">Next Question</button></div></div></template></div></template><template x-if=\"!active\"><div class=\"flex flex-col items-center font-medium space-y-6\"><div class=\"text-2xl font-bold text-zinc-900 dark:text-white\" x-text=\"'You scored '+Math.round((score/maxQuestionsPerQuiz)*100)+'%'\"></div><button class=\"px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-color duration-100 rounded-xl font-semibold text-white shadow-md hover:shadow-lg\" @click=\"resetQuiz()\">Take Again</button></div></template></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
