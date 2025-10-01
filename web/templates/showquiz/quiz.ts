@@ -79,7 +79,7 @@ document.addEventListener('alpine:init', () => {
 			this.selectedAnswers = [];
 			this.currentQuestion++;
 		},
-		resetQuclickHandleriz() {
+		resetQuiz() {
 			this.shuffleArray(this.questions);
 			this.score = 0;
 			this.selectedAnswers = [];

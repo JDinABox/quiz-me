@@ -5,7 +5,7 @@ var QuizList = Quizzes{
 		ID:                  "comptia-security-plus",
 		Name:                "CompTIA Security+ Practice Quiz",
 		Description:         "A CompTIA Security+ Practice Test",
-		MaxQuestionsPerQuiz: 30,
+		MaxQuestionsPerQuiz: 60,
 		Questions: []Question{
 			{
 				Question: "A security analyst is reviewing network traffic and notices an unusual amount of outbound traffic to an unknown IP address during non-business hours. Which of the following is the MOST likely cause?",
@@ -60,7 +60,8 @@ var QuizList = Quizzes{
 					4: "Data encryption",
 					5: "Contingency planning",
 				},
-				Correct: []int{1, 3, 4},
+				Correct:     []int{1, 3, 4},
+				Explanation: "Technical security controls are protections implemented through technology; `firewalls`, `Intrusion Detection Systems (IDS)`, and `data encryption` all use hardware or software to enforce security. The other options are considered administrative controls because they focus on policies, procedures, and user training rather than technological systems.",
 			},
 			{
 				Question: "What is the primary purpose of a salt when hashing passwords?",

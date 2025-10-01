@@ -70,10 +70,10 @@ templ Body(quizJson string) {
 				</div>
 			</template>
 			<template x-if="!active">
-				<div class="flex flex-col items-center font-medium space-y-6">
-					<div class="text-2xl font-bold text-zinc-900 dark:text-white" x-text="'You scored '+Math.round((score/maxQuestionsPerQuiz)*100)+'%'"></div>
+				<div class="flex flex-col items-center font-medium space-y-6 text-lg">
+					<div class="h4 text-zinc-900 dark:text-white" x-text="'You scored '+Math.round((score/maxQuestionsPerQuiz)*100)+'%'"></div>
 					<button
-						class="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-color duration-100 rounded-xl font-semibold text-white shadow-md hover:shadow-lg"
+						class="px-4 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-color duration-100 rounded-xl font-semibold text-white shadow-md hover:shadow-lg"
 						@click="resetQuiz()"
 					>
 						Take Again
